@@ -526,6 +526,17 @@ export default {
           job_requirement: this.jobRequirement,
         }).then((res) => {
           if (res.data.msg == 'job posted') {
+            this.jobTitle = "";
+            this.jobLocation = "";
+            this.jobType = "";
+            this.jobClosedate = "";
+            this.companyName = "";
+            this.salary = "";
+            this.contactName = "";
+            this.contactEmail = "";
+            this.companyAddress = "";
+            this.jobDescription = "";
+            this.jobRequirement = "";
             Swal.fire(
               'Job Posted!',
               // 'You clicked the button!',
@@ -541,6 +552,17 @@ export default {
             })
           }
         }).catch((err) => {
+          this.jobTitle = "";
+          this.jobLocation = "";
+          this.jobType = "";
+          this.jobClosedate = "";
+          this.companyName = "";
+          this.salary = "";
+          this.contactName = "";
+          this.contactEmail = "";
+          this.companyAddress = "";
+          this.jobDescription = "";
+          this.jobRequirement = "";
           Swal.fire({
             icon: 'error',
             title: 'Failed to posted job',

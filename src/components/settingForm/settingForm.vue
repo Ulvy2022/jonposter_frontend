@@ -60,7 +60,7 @@ export default {
             userPayments: [],
             userJobs: [],
             showJobPosted: false,
-            // userId: localStorage.getItem("userId"),
+            userId: localStorage.getItem("userId"),
         }
     },
 
@@ -118,8 +118,9 @@ export default {
         },
 
         paymentHistory() {
-            axios.get("http://localhost:8000/api/payment/" + this.userId).then((res) => {
+            axios.get("http://localhost:8000/api/transaction/" + this.userId).then((res) => {
                 this.userPayments = res.data;
+                console.log(res.data);
             })
         },
 
