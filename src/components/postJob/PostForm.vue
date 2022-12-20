@@ -540,7 +540,9 @@ export default {
   },
 
   mounted() {
-    this.get_current_user_subscription()
+    if (localStorage.getItem('role') != "Admine") {
+      this.get_current_user_subscription()
+    }
   }
 
 };
