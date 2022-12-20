@@ -15,7 +15,7 @@
                             </svg>
                         </div>
                         <input type="text" id="email-address-icon" v-model="email"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-3  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-3 "
                             placeholder="Email">
                     </div>
 
@@ -35,7 +35,7 @@
                             </svg>
                         </div>
                         <input :type="type" id="email-address-icon" v-model="password" @keyup.enter="signIn()"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-3  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-3  "
                             placeholder="Password">
                     </div>
                     <div class=" mt-4 mb-2">
@@ -74,7 +74,7 @@
 
                     <!-- Submit button -->
                     <button type="submit" v-if="!isClickSigIn" @click="signIn()"
-                        class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
+                        class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md  w-full"
                         data-mdb-ripple="true" data-mdb-ripple-color="light">
                         Sign in
                     </button>
@@ -413,8 +413,10 @@ export default {
                             localStorage.setItem('userId', res.data.id)
                             localStorage.setItem('role', res.data.role)
                             localStorage.setItem('subscription', res.data.subscription)
-                            this.showInvalid = false;
-                            window.location.assign('/')
+                            axios.post("http://localhost:8000/api/trail", { subscriber_id: res.data.id, plan_id: 1 }).then(() => {
+                                this.showInvalid = false;
+                                window.location.assign('/')
+                            })
                         }
                     }).catch(() => {
                         this.isClickSigIn = !this.isClickSigIn
@@ -457,6 +459,7 @@ export default {
         },
 
     },
+
 }
 
 </script>

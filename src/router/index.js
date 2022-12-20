@@ -126,6 +126,17 @@ const routes = [
     }
   },
   {
+    path: '/create_plan',
+    name: 'create_plan',
+    component: () => import('@/views/createPlan/creatPlan.vue'),
+    beforeEnter() {
+      const admine = localStorage.getItem('role');
+      if (admine != 'Admine') {
+        return { name: 'notFound' };
+      }
+    }
+  },
+  {
     path: '/userDetail/:id',
     name: 'userDetail',
     component: () => import('@/views/userPost/userPostView.vue'),

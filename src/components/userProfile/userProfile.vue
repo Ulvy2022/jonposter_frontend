@@ -20,7 +20,7 @@
                         </div>
                         <label class="block ">
                             <span class="sr-only">Upload Picture</span>
-                            <input type="file" @change="onFileChange"
+                            <input type="file" @change="onFileChange" enctype="multipart/form-data"
                                 class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
                         </label>
 
@@ -204,9 +204,9 @@ export default {
     methods: {
         getUserData() {
             axios.get('http://localhost:8000/api/getUser/' + localStorage.getItem("userId")).then((res) => {
-                this.img = res.data.img;
                 this.fname = this.capitalize(res.data.fullName)
                 this.gender = res.data.gender;
+                this.img = res.data.img;
                 this.email = res.data.email;
                 this.address = res.data.address;
                 this.phoneNumber = res.data.phoneNumber;
@@ -214,6 +214,7 @@ export default {
                 this.role = res.data.role;
             })
         },
+
         capitalize(words) {
             return words[0].toUpperCase() + words.substring(1, words.length).toLowerCase();
         },
