@@ -62,11 +62,18 @@
                                 <label for="remember" class="text-gray-500 dark:text-gray-300">Show password</label>
                             </div>
                         </div>
-                        <button
+                        <!-- <button
                             class="hidden lg:block text-blue-600 cursor-pointer hover:underline hover:underline-offset-1 "
                             @click="show_register">
                             Sign Up
-                        </button>
+                        </button> -->
+
+                        <router-link to="/signup"
+                            class="text-white p-1 rounded bg-blue-500 block mt-4 lg:inline-block active lg:mt-0 hover:text-white mr-4">
+                            Sign Up
+                        </router-link>
+
+
                         <a @click="forgotPassword"
                             class="cursor-pointer hover:underline hover:underline-offset-1 text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out">Forgot
                             password?</a>
@@ -95,128 +102,6 @@
                     <googleLoginForm @create-account="is_show = true;" />
                 </div>
             </div>
-
-            <Register-Form v-if='is_show' @close_register="close_register">
-                <div class="modal-mask">
-                    <div class="modal-wrapper w-full top-24">
-                        <form id="app" @submit.prevent="handleFormSubmit"
-                            class="bg-gray-100 shadow-2xl md:w-[80%] lg:w-[50%] w-full m-auto mt-64 rounded px-8 pt-6 pb-8 mb-4">
-                            <span
-                                class="text-light-600 font-sans flex justify-center items-center mb-5 font-bold">REGISTER</span>
-                            <div class="mb-2 w-full grid grid-cols-2">
-                                <div class="flex flex-col w-full">
-                                    <input type="text" placeholder="FullName"
-                                        class="peer shadow appearance-none border mr-2 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                        v-model="fullName" required>
-                                </div>
-
-                                <div class="flex flex-col w-full">
-                                    <select v-model="gender" id="job-type"
-                                        class="peer shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                        required="">
-                                        <option selected>Gender</option>
-                                        <option value="Female">Female</option>
-                                        <option value="Male">Male</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="grid w-full gap-4 mb-2 grid-cols-1">
-                                <div class="w-full">
-                                    <input required type="email" placeholder="Email"
-                                        class="peer shadow appearance-none border mr-2 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                        v-model="emailUser">
-                                </div>
-                            </div>
-
-                            <div class="mb-2 w-full grid grid-cols-2">
-                                <div class="flex flex-col mb-2 w-full">
-                                    <div class="relative">
-                                        <input pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" required
-                                            placeholder="Password" :type="showPass ? 'password' : 'text'"
-                                            class="peer shadow appearance-none border mr-2 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            v-model="passwordUser">
-                                        <div
-                                            class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
-                                            <svg class="h-5 w-5 text-black" @click="showPass = !showPass" width="24"
-                                                height="24" viewBox="0 0 24 24"
-                                                :class="{ 'hidden': !showPass, 'block': showPass }" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" />
-                                                <circle cx="12" cy="12" r="2" />
-                                                <path d="M2 12l1.5 2a11 11 0 0 0 17 0l1.5 -2" />
-                                                <path d="M2 12l1.5 -2a11 11 0 0 1 17 0l1.5 2" />
-                                            </svg>
-
-
-                                            <svg class="h-5 w-5 text-black" @click="showPass = !showPass" fill="none"
-                                                viewBox="0 0 24 24" :class="{ 'block': !showPass, 'hidden': showPass }"
-                                                stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="flex flex-col w-full">
-                                    <div class="relative">
-                                        <input pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" required
-                                            placeholder="Confirm Password"
-                                            :type="showConfirmPassword ? 'password' : 'text'"
-                                            class="peer shadow appearance-none border mr-2 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                            v-model="passwordUserConfirm">
-                                        <div
-                                            class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
-
-                                            <svg class="h-5 w-5 text-black"
-                                                @click="showConfirmPassword = !showConfirmPassword" width="24"
-                                                height="24" viewBox="0 0 24 24"
-                                                :class="{ 'hidden': !showConfirmPassword, 'block': showConfirmPassword }"
-                                                stroke-width="2" stroke="currentColor" fill="none"
-                                                stroke-linecap="round" stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" />
-                                                <circle cx="12" cy="12" r="2" />
-                                                <path d="M2 12l1.5 2a11 11 0 0 0 17 0l1.5 -2" />
-                                                <path d="M2 12l1.5 -2a11 11 0 0 1 17 0l1.5 2" />
-                                            </svg>
-
-
-                                            <svg class="h-5 w-5 text-black"
-                                                @click="showConfirmPassword = !showConfirmPassword" fill="none"
-                                                viewBox="0 0 24 24"
-                                                :class="{ 'block': !showConfirmPassword, 'hidden': showConfirmPassword }"
-                                                stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div
-                                class="flex w-full items-center justify-between lg:grid-cols-3 md:grid-cols-1 md:w-full">
-                                <button class="bg-blue-600 rounded p-2 w-full text-white" type='submit'
-                                    @click="register">
-                                    Register
-                                </button>
-
-                                <button class="bg-blue-600 rounded p-2 ml-2 mr-2 w-full text-white"
-                                    @click="registerByGoogle" type="button">
-                                    Register Via Google
-                                </button>
-
-                                <button class="bg-blue-600 rounded p-2 w-full text-white" @click='is_show = false'
-                                    type="button">
-                                    Cancal
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </Register-Form>
 
             <Password-Form v-if='pass_show'>
                 <div class="modal-mask">
@@ -266,13 +151,12 @@
 
 <script>
 import axios from "axios"
-import registerForm from '../slot/generalSlot.vue';
+// import registerForm from '../slot/generalSlot.vue';
 import googleLoginForm from '../google/googleLogin.vue';
-import { googleTokenLogin } from "vue3-google-login";
 import passwordForm from '../slot/generalSlot.vue'
 export default {
     components: {
-        'Register-Form': registerForm,
+        // 'Register-Form': registerForm,
         'Password-Form': passwordForm,
         googleLoginForm,
     },
@@ -333,70 +217,6 @@ export default {
             console.log('submit')
         },
 
-        register() {
-            if (!this.fullName.trim() == "" &&
-                !this.emailUser.trim() == "" &&
-                !this.passwordUser.trim() == "" &&
-                !this.passwordUserConfirm.trim() == "" &&
-                !this.gender.trim() == "" &&
-                this.passwordUser == this.passwordUserConfirm) {
-                let body = {
-                    fullName: this.fullName,
-                    role: this.role,
-                    email: this.emailUser,
-                    gender: this.gender,
-                    password: this.passwordUser,
-                }
-                axios.post("http://127.0.0.1:8000/api/register/", body)
-                    .then(() => {
-                        axios.post('http://127.0.0.1:8000/api/registerEmail/' + this.emailUser)
-                            .then((res) => {
-                                console.log(res.data)
-                                console.log(this.emailUser)
-                                this.fullName = "";
-                                this.emailUser = "";
-                                this.passwordUser = "";
-                                this.gender = "";
-                                this.passwordUserConfirm = "";
-
-                            })
-                    })
-
-                this.is_show = false;
-            }
-        },
-
-        registerByGoogle() {
-            googleTokenLogin({ clientId: '353283530301-lgl6jhjvg6cr3foc30607b3omfqs2ste.apps.googleusercontent.com' }).then((response) => {
-                var url = 'https://www.googleapis.com/oauth2/v3/userinfo?access_token=' + response.access_token;
-                axios.get(url)
-                    .then((res) => {
-                        console.log(res.data)
-                        this.fullNameGoogle = res.data.name;
-                        this.emailGoogle = res.data.email;
-
-                    })
-                this.is_show = false
-                this.pass_show = true
-            })
-        },
-
-        registerByGoogleLast() {
-            this.dataRegisterViaGoo = {
-                fullName: this.fullNameGoogle,
-                email: this.emailGoogle,
-                password: this.passwordGoogle
-            }
-            axios.post("http://127.0.0.1:8000/api/register/", this.dataRegisterViaGoo)
-                .then(() => {
-                    axios.post('http://127.0.0.1:8000/api/registerEmail/' + this.emailGoogle)
-                        .then((res) => {
-                            console.log(res.data);
-                            this.emailGoogle = "";
-                        })
-                    this.pass_show = false;
-                })
-        },
 
         signIn() {
             if (!this.email.trim() == '' && !this.password.trim() == '') {
@@ -457,6 +277,16 @@ export default {
         },
 
     },
+
+    mounted () {
+        if (this.$route.params.id != undefined) {
+            console.log(this.$route.params.id);
+            axios.put("http://127.0.0.1:8000/api/verifyEmail/" + this.$route.params.id)
+            .then((res)=>{
+                console.log(res.data);
+            })
+        }
+    }
 }
 
 </script>

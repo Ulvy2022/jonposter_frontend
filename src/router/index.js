@@ -1,8 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import LoginForm from '../views/login/LoginView.vue';
+import SignupForm from '../views/signup/SignupView.vue';
 import RegisterGoogle from '../views/register/RegisterView.vue';
-
-
 
 const routes = [
   {
@@ -10,6 +9,20 @@ const routes = [
     name: 'login',
     component: LoginForm,
   },
+
+  {
+    path: '/signup',
+    name: 'signup',
+    component: SignupForm,
+  },
+
+  {
+    path: '/verifyEmail/:id',
+    name: 'verifyId',
+    component: LoginForm,
+  },
+
+
 
   {
     path: '/register',
