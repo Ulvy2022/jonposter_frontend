@@ -2,7 +2,9 @@
     <div class="animate__zoomIn animate__animated">
         <form id="app" @submit.prevent="handleFormSubmit"
             class="bg-gray-100 shadow-2xl md:w-[80%] lg:w-[50%] w-full m-auto mt-20 rounded px-8 pt-6 pb-8 mb-4">
-            <p v-if="verifyEmail" class="rounded bg-orange-200 animate__animated animate__bounce">Please check your
+            <p v-if="verifyEmail"
+                class="rounded bg-green-500 text-white animate__animated animate__bounce flex text-center w-full">
+                Please check your
                 email account to verify email before login </p>
             <span class="text-light-600 font-sans flex justify-center items-center mb-5 font-bold">REGISTER</span>
             <div class="mb-2 w-full grid grid-cols-2">
@@ -35,8 +37,7 @@
             <div class="mb-2 w-full grid grid-cols-2">
                 <div class="flex flex-col mb-2 w-full">
                     <div class="relative">
-                        <input pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" placeholder="Password"
-                            :type="showPass ? 'text' : 'password'"
+                        <input placeholder="Password" :type="showPass ? 'text' : 'password'"
                             class="peer shadow appearance-none border mr-2 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             v-model="passwordUser">
                         <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
@@ -63,8 +64,7 @@
 
                 <div class="flex flex-col w-full">
                     <div class="relative">
-                        <input pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" placeholder="Confirm Password"
-                            :type="showConfirmPassword ? 'text' : 'password'"
+                        <input placeholder="Confirm Password" :type="showConfirmPassword ? 'text' : 'password'"
                             class="peer shadow appearance-none border mr-2 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             v-model="passwordUserConfirm">
                         <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
@@ -113,6 +113,19 @@
             </div>
         </form>
     </div>
+
+    <!-- <div class="bg-gray w-full  mb-20">
+        <div class="w-3/6 m-auto bg-gray-200 p-4 grid gap-y-4 rounded-md">
+            <p class="text-lg font-bold">Hello !</p>
+            <p class="text-sm">You are receiving this email because we received a password reset request for your
+                account.</p>
+            <button class="bg-gray-500 w-1/5 p-3 rounded-sm  m-auto text-white">Verify Email</button>
+            <div class="  border-t-2 border-gray-500 mt-5"></div>
+            <p class="text-gray-500 text-sm">If you're having trouble clicking the "Verify Email" button, copy and
+                paste the URL below into your web browser: <a href="">dfsdf</a>
+            </p>
+        </div>
+    </div> -->
 </template>
 
 <script>
@@ -156,8 +169,7 @@ export default {
                 axios.post("http://127.0.0.1:8000/api/register/", body)
                     .then(() => {
                         axios.post('http://127.0.0.1:8000/api/registerEmail/' + this.emailUser)
-                            .then((res) => {
-                                console.log(res.data)
+                            .then(() => {
                                 this.fullName = "";
                                 this.emailUser = "";
                                 this.passwordUser = "";
@@ -169,7 +181,6 @@ export default {
                             .catch(error => {
                                 console.log(error)
                             })
-                        // alert("Please verify email in you email account!!")
                     })
             }
         },
