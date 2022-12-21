@@ -3,7 +3,7 @@
         <div class="container px-6 py-12 h-full animate__zoomIn animate__animated">
             <!-- <p>Welcome to my codepen profile</p> -->
             <div class="flex justify-center items-center flex-wrap g-6 text-gray-800">
-                <div class=" w-full lg:w-5/12  lg:ml-20  bg-white p-5 rounded-lg ">
+                <div class=" w-full lg:w-5/12  lg:ml-20  bg-white p-5 rounded-lg">
                     <p class="w-full flex justify-center items-center text-2xl text-blue-500 mb-4 ">
                         Welcome back</p>
                     <div class="relative mb-5">
@@ -15,7 +15,7 @@
                             </svg>
                         </div>
                         <input type="text" id="email-address-icon" v-model="email"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-3  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-3 "
                             placeholder="Email">
                     </div>
 
@@ -35,7 +35,7 @@
                             </svg>
                         </div>
                         <input :type="type" id="email-address-icon" v-model="password" @keyup.enter="signIn()"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-3  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-3  "
                             placeholder="Password">
                     </div>
                     <div class=" mt-4 mb-2">
@@ -62,36 +62,25 @@
                                 <label for="remember" class="text-gray-500 dark:text-gray-300">Show password</label>
                             </div>
                         </div>
-                        <!-- <button
-                            class="hidden lg:block text-blue-600 cursor-pointer hover:underline hover:underline-offset-1 "
-                            @click="show_register">
-                            Sign Up
-                        </button> -->
-
-                        <router-link to="/signup"
-                            class="text-white p-1 rounded bg-blue-500 block mt-4 lg:inline-block active lg:mt-0 hover:text-white mr-4">
-                            Sign Up
-                        </router-link>
-
-
+                    
                         <a @click="forgotPassword"
                             class="cursor-pointer hover:underline hover:underline-offset-1 text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out">Forgot
                             password?</a>
                     </div>
 
                     <!-- Submit button -->
-                    <button type="submit" v-if="!isClickSigIn" @click="signIn()"
-                        class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
+                    <button type="submit" v-if="!isClickSigIn"  @click="signIn()"
+                        class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md  w-full"
                         data-mdb-ripple="true" data-mdb-ripple-color="light">
                         Sign in
                     </button>
 
-                    <p class="text-sm font-light lg:hidden mt-3  text-gray-500 dark:text-gray-400"
+                    <!-- <p class="text-sm font-light lg:hidden mt-3  text-gray-500 dark:text-gray-400"
                         @click="show_register()">
                         Don’t have an account yet? <a href="#"
                             class="font-medium text-blue-500 hover:underline hover:underline-offset-2 dark:text-primary-500">Sign
                             up</a>
-                    </p>
+                    </p> -->
                     <button v-if="isClickSigIn" class="btn loading bg-blue-600 w-full">Sign In</button>
 
                     <div
@@ -100,6 +89,14 @@
                     </div>
                     <vue-github username="harps116" />
                     <googleLoginForm @create-account="is_show = true;" />
+
+                    <div class="flex items-center justify-center">
+                        <span class="text-black-500">Don’t have an account yet?</span>
+                        <router-link to="/signup"
+                            class="text-black-300 p-1 rounded hover:underline block mt-4 lg:inline-block active text-blue-600 lg:mt-0 mr-4">
+                            Sign Up
+                        </router-link>
+                    </div>
                 </div>
             </div>
 
@@ -110,7 +107,7 @@
                             <p>Please input your password: It must be 6 characters at least</p>
                             <div class="flex flex-col mb-2 w-full">
                                 <div class="relative">
-                                    <input required placeholder="Password" :type="showPass ? 'password' : 'text'"
+                                    <input placeholder="Password" :type="showPass ? 'password' : 'text'"
                                         class="peer shadow appearance-none border mr-2 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                         v-model="passwordGoogle">
 
@@ -180,6 +177,7 @@ export default {
             password: '',
 
 
+
             // ==========Register=======
             showPass: false,
             showConfirmPassword: false,
@@ -215,8 +213,7 @@ export default {
         // Register===============
         handleFormSubmit() {
             console.log('submit')
-        },
-
+        }, 
 
         signIn() {
             if (!this.email.trim() == '' && !this.password.trim() == '') {
@@ -233,8 +230,10 @@ export default {
                             localStorage.setItem('userId', res.data.id)
                             localStorage.setItem('role', res.data.role)
                             localStorage.setItem('subscription', res.data.subscription)
-                            this.showInvalid = false;
-                            window.location.assign('/')
+                            axios.post("http://localhost:8000/api/trail", { subscriber_id: res.data.id, plan_id: 1 }).then(() => {
+                                this.showInvalid = false;
+                                window.location.assign('/')
+                            })
                         }
                     }).catch(() => {
                         this.isClickSigIn = !this.isClickSigIn
@@ -275,13 +274,12 @@ export default {
                 return input = null;
             }
         },
-
     },
 
     mounted () {
         if (this.$route.params.id != undefined) {
             console.log(this.$route.params.id);
-            axios.put("http://127.0.0.1:8000/api/verifyEmail/" + this.$route.params.id)
+            axios.put("http://127.0.0.1:8000/api/verifyemail/" + this.$route.params.id)
             .then((res)=>{
                 console.log(res.data);
             })

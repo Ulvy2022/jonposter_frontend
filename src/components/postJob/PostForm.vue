@@ -442,69 +442,6 @@ export default {
   },
 
   methods: {
-    createJob() {
-      Swal.fire({
-        title: "Do you want to post this jobPost?",
-        showDenyButton: true,
-        showCancelButton: true,
-        confirmButtonText: "Save",
-        denyButtonText: "Don't Post",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          if (
-            !this.jobTitle.trim() == "" &&
-            !this.jobLocation.trim() == "" &&
-            !this.jobClosedate.trim() == "" &&
-            !this.jobType.trim() == "" &&
-            !this.salary == "" &&
-            !this.contactName.trim() == "" &&
-            !this.companyAddress.trim() == "" &&
-            !this.contactEmail.trim() == "" &&
-            !this.jobDescription.trim() == "" &&
-            !this.jobRequirement.trim() == ""
-          ) {
-            axios
-              .post("http://127.0.0.1:8000/api/jobposter/", {
-                user_id: localStorage.getItem("userId"),
-                job_title: this.jobTitle,
-                company_location: this.jobLocation,
-                job_type: this.jobType,
-                job_closedate: this.jobClosedate,
-                company_name: this.companyName,
-                salary: this.salary,
-                contact_name: this.contactName,
-                contact_email: this.contactEmail,
-                job_description: this.jobDescription,
-                company_address: this.companyAddress,
-                job_requirement: this.jobRequirement,
-              })
-              .then((res) => {
-                if (res.data.msg == 'job posted') {
-                  this.jobTitle = "";
-                  this.jobLocation = "";
-                  this.jobType = "";
-                  this.jobClosedate = "";
-                  this.companyName = "";
-                  this.salary = "";
-                  this.contactName = "";
-                  this.contactEmail = "";
-                  this.companyAddress = "";
-                  this.jobDescription = "";
-                  this.jobRequirement = "";
-                  Swal.fire(
-                    "Job Posted"
-                  )
-                }
-              });
-            // User need to subscribe first.
-          } else {
-            Swal.fire(
-              'Please complete all information before click button "Add"!!!'
-            );
-          }
-        }
-      });
-    },
 
     postJob() {
       this.isClikcAdd = true;
@@ -582,9 +519,8 @@ export default {
     },
 
     get_current_user_subscription() {
-      axios.get("http://localhost:8000/api/current_scubscribe/" + this.userId).then((res) => {
+      axios.get("http://localhost:8000/api/current_scubscribe/" + localStorage.getItem("userId")).then((res) => {
         this.isSubscription = res.data;
-        console.log(res.data);
       })
     },
 

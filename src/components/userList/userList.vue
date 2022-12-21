@@ -232,11 +232,12 @@ export default {
 
         setUserToAdmine() {
             console.log(this.idToUpdate);
-            axios.put("http://localhost:8000/api/setUserToAdmine/" + this.idToUpdate).then(() => {
+            axios.put("http://localhost:8000/api/toAdmine/" + this.idToUpdate).then(() => {
                 this.getAllUser()
                 Swal.fire('Updated', '', 'success');
+                axios.post("http://localhost:8000/api/setUserToAdmine/" + this.email)
             }).catch(() => {
-                Swal.fire('error!', '', 'success')
+                Swal.fire('error!', '', 'error')
             })
         }
 

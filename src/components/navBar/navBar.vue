@@ -13,8 +13,6 @@
                 </div>
 
                 <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start ">
-
-
                     <div class="hidden w-full sm:ml-6 sm:block lg:mt-2">
                         <div class="flex space-x-4">
                             <router-link to="/"
@@ -128,7 +126,7 @@
         <DisclosurePanel class="sm:hidden">
             <div class="space-y-1 px-2 pt-2 pb-3" v-if="role == 'Admine'">
                 <DisclosureButton v-for="item in navigationAdmine" :key="item.name" as="a"
-                    :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block px-3 py-2 rounded-md text-base font-medium']"
+                    :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white hover:text-blue-500', 'block px-3 py-2 rounded-md text-base font-medium']"
                     :aria-current="item.current ? 'page' : undefined">
                     <router-link class="w-full" :to="item.href">
                         {{ item.name }}
@@ -137,7 +135,7 @@
             </div>
             <div class="space-y-1 px-2 pt-2 pb-3" v-else>
                 <DisclosureButton v-for="item in navigation" :key="item.name" as="a"
-                    :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block px-3 py-2 rounded-md text-base font-medium']"
+                    :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white hover:text-blue-500', 'block px-3 py-2 rounded-md text-base font-medium']"
                     :aria-current="item.current ? 'page' : undefined">
                     <router-link class="w-full" :to="item.href">
                         {{ item.name }}
@@ -154,9 +152,13 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
 
 const navigation = [
     { name: 'Job List', href: '/', current: false },
-    { name: 'Subscribe Plan', href: '/subscribe', current: false },
+    { name: 'Subscribe', href: '/subscribe', current: false },
     { name: 'Login', href: '/login', current: false },
+
 ]
+if (localStorage.getItem('userId') == 'undefined') {
+    navigation.push({ name: 'Login', href: '/login', current: false })
+}
 const navigationAdmine = [
     { name: 'Job List', href: '/', current: false },
     { name: 'Subscribe Plan', href: '/subscribe', current: false },
@@ -165,7 +167,7 @@ const navigationAdmine = [
 </script>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
 export default {
     data() {
         return {
@@ -202,6 +204,7 @@ export default {
 
     mounted() {
         this.userInfo()
+
     }
 }
 </script>

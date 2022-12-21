@@ -2,6 +2,7 @@
   <div>
     <form id="app" @submit.prevent="handleFormSubmit"
             class="bg-gray-100 shadow-2xl md:w-[80%] lg:w-[50%] w-full m-auto mt-64 rounded px-8 pt-6 pb-8 mb-4">
+            <p v-if="verifyEmail" class="rounded bg-orange-200 animate__animated animate__bounce">Please check your email account to verify email before login </p>
             <span
                 class="text-light-600 font-sans flex justify-center items-center mb-5 font-bold">REGISTER</span>
             <div class="mb-2 w-full grid grid-cols-2">
@@ -103,7 +104,7 @@
 
             <div
                 class="flex w-full items-center justify-between lg:grid-cols-3 md:grid-cols-1 md:w-full">
-                <button class="bg-blue-600 rounded p-2 w-full text-white" type='submit'
+                <button class="bg-blue-600 rounded p-2 w-full text-white"
                     @click="register">
                     Register
                 </button>
@@ -128,10 +129,6 @@
 import axios from "axios"
 import { googleTokenLogin } from "vue3-google-login";
 export default {
-    components: {
-
-    },
-    
     data() {
         return {
             // ==========Register=======
@@ -147,6 +144,7 @@ export default {
             emailGoogle: '',
             gender: '',
             dataRegisterViaGoo: {},
+            verifyEmail: false
         }
     },
 
@@ -175,11 +173,13 @@ export default {
                                 this.passwordUser = "";
                                 this.passwordUserConfirm = "";
                                 this.gender = "";
+                                this.verifyEmail = true;
+                                
                             })
                             .catch(error =>{
                                 console.log(error)
                             })
-                        alert("Please verify email in you email account!!")
+                        // alert("Please verify email in you email account!!")
                     })
             }   
         },
@@ -192,7 +192,6 @@ export default {
                         console.log(res.data)
                         this.fullNameGoogle = res.data.name;
                         this.emailGoogle = res.data.email;
-
                     })
               
                 this.pass_show = true
@@ -211,6 +210,7 @@ export default {
                         .then((res) => {
                             console.log(res.data);
                             this.emailGoogle = "";
+                            this.verifyEmail = true;
                         })
                     this.pass_show = false;
                 })

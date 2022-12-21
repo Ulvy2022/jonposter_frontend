@@ -1,9 +1,13 @@
 <template>
     <section class="text-gray-600 body-font overflow-hidden">
         <div class="container px-5 py-24 mx-auto ">
-            <div class="flex flex-col text-center w-full mb-20">
-                <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Planning</h1>
-                <p class="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-500">Choose your favourite plan</p>
+            <div class="flex justify-center text-center w-full mb-20 ">
+                <div>
+                    <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Planning</h1>
+                </div>
+                <router-link to="/create_plan">
+                    <button class="p-3 bg-blue-500 text-white rounded-md">Add Plan</button>
+                </router-link>
                 <!-- <div class="flex mx-auto border-2 border-indigo-500 rounded overflow-hidden mt-6">
                     <button class="py-1 px-4 bg-indigo-500 text-white focus:outline-none">Monthly</button>
                     <button class="py-1 px-4 focus:outline-none">Annually</button>
@@ -74,13 +78,7 @@ export default {
     data() {
         return {
             typePlane: null,
-            link: 'https://buy.stripe.com/test_5kA6sjfSWdSUcwgeUW',
-            feature_benifits: [
-                ['Post 1 job for 15 days'],
-                ['Post 3 jobs for 15 days'],
-                ['Post 10 jobs for 30 days'],
-                ['Unlimited post jobs for 30 days'],
-            ],
+            feature_benifits: [],
             hash: "",
             amount: 0,
             tran_id: '',
@@ -168,12 +166,21 @@ export default {
                 this.req_time = res.data;
             })
         },
+        getPlanBenifits() {
+            axios.get("http://localhost:8000/api/getPlanBenifits").then((res) => {
+                var benifits = res.data;
+                for (let bene of benifits) {
+                    this.feature_benifits.push([bene.benifits])
+                }
+            })
+        }
 
 
     },
     mounted() {
         axios.get('http://localhost:8000/api/features').then((res) => {
             this.typePlane = res.data;
+            this.getPlanBenifits()
             this.getTranId();
             this.getTimestamp();
         })
