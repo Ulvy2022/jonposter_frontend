@@ -6,7 +6,7 @@
                     <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Planning</h1>
                 </div>
                 <router-link to="/create_plan">
-                    <button class="p-3 bg-blue-500 text-white rounded-md">Add Plan</button>
+                    <button class="p-3 bg-blue-500 text-white rounded-md" v-if="role == 'Admine'">Add Plan</button>
                 </router-link>
                 <!-- <div class="flex mx-auto border-2 border-indigo-500 rounded overflow-hidden mt-6">
                     <button class="py-1 px-4 bg-indigo-500 text-white focus:outline-none">Monthly</button>
@@ -77,6 +77,7 @@ import axios from "axios";
 export default {
     data() {
         return {
+            role: localStorage.getItem("role"),
             typePlane: null,
             feature_benifits: [],
             hash: "",
