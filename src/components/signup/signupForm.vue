@@ -36,7 +36,7 @@
                 <div class="flex flex-col mb-2 w-full">
                     <div class="relative">
                         <input pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" placeholder="Password"
-                            :type="showPass ? 'password' : 'text'"
+                            :type="showPass ? 'text' : 'password'"
                             class="peer shadow appearance-none border mr-2 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             v-model="passwordUser">
                         <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
@@ -64,7 +64,7 @@
                 <div class="flex flex-col w-full">
                     <div class="relative">
                         <input pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" placeholder="Confirm Password"
-                            :type="showConfirmPassword ? 'password' : 'text'"
+                            :type="showConfirmPassword ? 'text' : 'password'"
                             class="peer shadow appearance-none border mr-2 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             v-model="passwordUserConfirm">
                         <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
