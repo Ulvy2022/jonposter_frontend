@@ -45,7 +45,7 @@ export default {
                     denyButtonText: `Don't save`,
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        axios.put("http://localhost:8000/api/user/" + this.idToUpdate, userInfo)
+                        axios.put("http://52.221.224.24/api/user/" + this.idToUpdate, userInfo)
                             .then((res) => {
                                 if (res.data.msg == 'updated') {
                                     Swal.fire('Saved!', '', 'success')
@@ -64,7 +64,7 @@ export default {
             }
         },
         getAllUser() {
-            axios.get("http://localhost:8000/api/getAllUsers")
+            axios.get("http://52.221.224.24/api/getAllUsers")
                 .then((res) => {
                     this.allUsers = res.data
                     this.numberOfUsers = this.allUsers.length
@@ -76,7 +76,7 @@ export default {
 
         getSpecificUser(id) {
             this.idToUpdate = id
-            axios.get('http://localhost:8000/api/getUser/' + id).then((res) => {
+            axios.get('http://52.221.224.24/api/getUser/' + id).then((res) => {
                 this.img = res.data.img;
                 this.fullName = res.data.fullName;
                 this.gender = res.data.gender;
@@ -146,7 +146,7 @@ export default {
             for (let id of usersId) {
                 this.numberOfUsers -= 1;
                 document.getElementById(id).remove();
-                axios.delete("http://localhost:8000/api/user/" + id);
+                axios.delete("http://52.221.224.24/api/user/" + id);
             }
         },
 
@@ -232,10 +232,10 @@ export default {
 
         setUserToAdmine() {
             console.log(this.idToUpdate);
-            axios.put("http://localhost:8000/api/toAdmine/" + this.idToUpdate).then(() => {
+            axios.put("http://52.221.224.24/api/toAdmine/" + this.idToUpdate).then(() => {
                 this.getAllUser()
                 Swal.fire('Updated', '', 'success');
-                axios.post("http://localhost:8000/api/setUserToAdmine/" + this.email)
+                axios.post("http://52.221.224.24/api/setUserToAdmine/" + this.email)
             }).catch(() => {
                 Swal.fire('error!', '', 'error')
             })

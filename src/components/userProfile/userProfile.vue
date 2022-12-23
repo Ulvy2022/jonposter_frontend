@@ -203,7 +203,7 @@ export default {
     },
     methods: {
         getUserData() {
-            axios.get('http://localhost:8000/api/getUser/' + localStorage.getItem("userId")).then((res) => {
+            axios.get('http://52.221.224.24/api/getUser/' + localStorage.getItem("userId")).then((res) => {
                 this.fname = this.capitalize(res.data.fullName)
                 this.gender = res.data.gender;
                 this.img = res.data.img;
@@ -236,7 +236,7 @@ export default {
                     phoneNumber: this.phoneNumber,
                     companyName: this.companyName
                 }
-                axios.put("http://localhost:8000/api/user/" + localStorage.getItem('userId') + '/', userInfo).then((res) => {
+                axios.put("http://52.221.224.24/api/user/" + localStorage.getItem('userId') + '/', userInfo).then((res) => {
                     if (res.data.msg == 'updated') {
                         this.showBtnSaved = !this.showBtnSaved
                         this.showBtnProgress = !this.showBtnProgress
@@ -253,7 +253,7 @@ export default {
             var formData = new FormData();
             formData.append('img', file);
             formData.append('_method', "PUT");
-            axios.post('http://localhost:8000/api/updateImg/' + localStorage.getItem('userId') + '/', formData).then(() => {
+            axios.post('http://52.221.224.24/api/updateImg/' + localStorage.getItem('userId') + '/', formData).then(() => {
                 location.reload()
             })
         },

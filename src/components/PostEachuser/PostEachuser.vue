@@ -9,7 +9,7 @@
                         <div class="flex">
                             <span
                                 class="flex items-center leading-normal bg-transparent rounded rounded-r-none border border-r-0 border-none lg:px-3 py-2 whitespace-no-wrap text-grey-dark text-sm">
-                               
+
                                 <svg @click="refreshDate" xmlns="http://www.w3.org/2000/svg"
                                     class="fill-blue-500 cursor-pointer w-6 h-6 " viewBox="0 0 512 512">
                                     <path
@@ -28,7 +28,7 @@
                         class="cursor-pointer relative px-5 py-2.5 transition-all ease-in duration-75  dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                         Active : {{ active }}
                     </span>
-                   
+
                 </button>
                 <p class="flex justify-center place-items-end text-blue-500">
                     {{ userJobs.length }} Posted Jobs
@@ -397,7 +397,7 @@ export default {
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios
-                        .delete("http://localhost:8000/api/jobposter/" + id)
+                        .delete("http://52.221.224.24/api/jobposter/" + id)
                         .then(() => {
                             this.getUserJobs();
                             Swal.fire("Job deleted", "success");
@@ -415,7 +415,7 @@ export default {
         getUserJobs() {
             axios
                 .get(
-                    "http://localhost:8000/api/jobposter/" +
+                    "http://52.221.224.24/api/jobposter/" +
                     localStorage.getItem("userId")
                 )
                 .then((res) => {
@@ -458,7 +458,7 @@ export default {
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios
-                        .put("http://localhost:8000/api/jobposter/" + this.jobId, {
+                        .put("http://52.221.224.24/api/jobposter/" + this.jobId, {
                             contact_email: this.email,
                             company_address: this.address,
                             salary: this.salary,

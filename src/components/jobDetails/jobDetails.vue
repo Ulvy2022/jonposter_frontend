@@ -113,7 +113,7 @@ export default {
 
     methods: {
         getJobDetails() {
-            axios.get('http://localhost:8000/api/jobposterId/' + this.$route.params.id).then((res) => {
+            axios.get('http://52.221.224.24/api/jobposterId/' + this.$route.params.id).then((res) => {
                 this.jobDetails = res.data
             })
         },
@@ -145,7 +145,7 @@ export default {
                     confirmButtonText: 'Yes, Apply'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        axios.post('http://localhost:8000/api/cv', formData).then((res) => {
+                        axios.post('http://52.221.224.24/api/cv', formData).then((res) => {
                             if (res.data.msg == 'success') {
                                 Swal.fire(
                                     'Applied!',

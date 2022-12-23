@@ -40,7 +40,7 @@ export default {
         },
 
         getAllUserSUb() {
-            axios.get("http://localhost:8000/api/userSubInfo/" + localStorage.getItem("subId")).then((res) => {
+            axios.get("http://52.221.224.24/api/userSubInfo/" + localStorage.getItem("subId")).then((res) => {
                 this.userSubs = res.data
                 console.log(res.data);
             })

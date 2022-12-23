@@ -62,14 +62,14 @@
                                 <label for="remember" class="text-gray-500 dark:text-gray-300">Show password</label>
                             </div>
                         </div>
-                    
+
                         <a @click="forgotPassword"
                             class="cursor-pointer hover:underline hover:underline-offset-1 text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out">Forgot
                             password?</a>
                     </div>
 
                     <!-- Submit button -->
-                    <button type="submit" v-if="!isClickSigIn"  @click="signIn()"
+                    <button type="submit" v-if="!isClickSigIn" @click="signIn()"
                         class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md  w-full"
                         data-mdb-ripple="true" data-mdb-ripple-color="light">
                         Sign in
@@ -213,24 +213,23 @@ export default {
         // Register===============
         handleFormSubmit() {
             console.log('submit')
-        }, 
+        },
 
         signIn() {
             if (!this.email.trim() == '' && !this.password.trim() == '') {
-                this.isClickSigIn = !this.isClickSigIn
+                this.isClickSigIn = true
                 this.isEmptyEmail = false
                 this.isEmptyPassword = false
-                axios.post('http://localhost:8000/api/login/',
+                axios.post('http://52.221.224.24/api/login/',
                     { email: this.email, password: this.password }).then((res) => {
-                        console.log(res.data)
                         if (res.data.sms == 'Invaliid password') {
-                            this.showInvalid = !this.showInvalid
+                            this.showInvalid = true
                             this.isClickSigIn = !this.isClickSigIn
                         } else {
                             localStorage.setItem('userId', res.data.id)
                             localStorage.setItem('role', res.data.role)
                             localStorage.setItem('subscription', res.data.subscription)
-                            axios.post("http://localhost:8000/api/trail", { subscriber_id: res.data.id, plan_id: 1 }).then(() => {
+                            axios.post("http://52.221.224.24/api/trail", { subscriber_id: res.data.id, plan_id: 1 }).then(() => {
                                 this.showInvalid = false;
                                 window.location.assign('/')
                             })
@@ -276,13 +275,13 @@ export default {
         },
     },
 
-    mounted () {
+    mounted() {
         if (this.$route.params.id != undefined) {
             console.log(this.$route.params.id);
             axios.put("http://127.0.0.1:8000/api/verifyemail/" + this.$route.params.id)
-            .then((res)=>{
-                console.log(res.data);
-            })
+                .then((res) => {
+                    console.log(res.data);
+                })
         }
     }
 }
