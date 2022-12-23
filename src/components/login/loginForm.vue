@@ -222,7 +222,7 @@ export default {
                 this.isEmptyPassword = false
                 axios.post('http://52.221.224.24/api/login/',
                     { email: this.email, password: this.password }).then((res) => {
-                        if (res.data.sms == 'Invaliid password') {
+                        if (res.data.sms == 'Invalid password') {
                             this.showInvalid = true
                             this.isClickSigIn = !this.isClickSigIn
                         } else {
